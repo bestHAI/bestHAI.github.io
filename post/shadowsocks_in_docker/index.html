@@ -1,0 +1,340 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Docker 快速部署 ShadowSocks 服务 | HAI</title>
+<link rel="shortcut icon" href="https://besthai.github.io/favicon.ico?v=1583649208263">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://besthai.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="Docker 快速部署 ShadowSocks 服务 | HAI - Atom Feed" href="https://besthai.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="〇、基本概况
+
+
+部署环境：docker 容器
+
+
+开放端口：8388（可更改）
+
+
+部署难度：支持一键部署
+
+
+一、快速部署
+
+
+下载：
+
+
+Git 方式：git clone https://github.com/bestHAI/ss_s..." />
+    <meta name="keywords" content="开发工具" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://besthai.github.io">
+  <img class="avatar" src="https://besthai.github.io/images/avatar.png?v=1583649208263" alt="">
+  </a>
+  <h1 class="site-title">
+    HAI
+  </h1>
+  <p class="site-description">
+    浮云游子意 · 落日故人情
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/bestHAI" target="_blank">
+          <i class="ri-github-line"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        <a href="https://facebook.com/liuhaifeng15" target="_blank">
+          <i class="ri-facebook-line"></i>
+        </a>
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              Docker 快速部署 ShadowSocks 服务
+            </h2>
+            <div class="post-info">
+              <span>
+                2019-02-08
+              </span>
+              <span>
+                2 min read
+              </span>
+              
+                <a href="https://besthai.github.io/tag/dev_tools/" class="post-tag">
+                  # 开发工具
+                </a>
+              
+            </div>
+            
+              <img class="post-feature-image" src="https://besthai.github.io/post-images/shadowsocks_in_docker.jpg" alt="">
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h2 id="〇-基本概况">〇、基本概况</h2>
+<ul>
+<li>
+<p>部署环境：docker 容器</p>
+</li>
+<li>
+<p>开放端口：8388（可更改）</p>
+</li>
+<li>
+<p>部署难度：支持一键部署</p>
+</li>
+</ul>
+<h2 id="一-快速部署">一、快速部署</h2>
+<ul>
+<li>
+<p>下载：</p>
+<ul>
+<li>
+<p>Git 方式：<code>git clone https://github.com/bestHAI/ss_server.git</code></p>
+</li>
+<li>
+<p>普通下载：<code>https://github.com/bestHAI/ss_server/archive/1.0.0.tar.gz</code></p>
+</li>
+</ul>
+</li>
+<li>
+<p>启动：</p>
+<ul>
+<li>
+<p><code>cd ss_server</code></p>
+</li>
+<li>
+<p><code>chmod +x auto_run.sh &amp;&amp; ./auto_run.sh 【登陆密码】</code></p>
+</li>
+</ul>
+</li>
+<li>
+<p>参数：</p>
+<ul>
+<li>【登陆密码】：部署完成后，客户端连接时的密码</li>
+</ul>
+</li>
+</ul>
+<h2 id="二-参数配置">二、参数配置</h2>
+<ul>
+<li>
+<p>修改 <code>ss_server/deploy.yml</code> 文件的相应参数：</p>
+<pre><code>ports:
+  - &quot;8388:8388&quot;  # 端口绑定
+
+environment:
+  - SERVER_ADDR=0.0.0.0  # 监听地址
+  - SERVER_PORT=8388  # 监听端口
+  - METHOD=aes-256-gcm  # 加密方式
+  - PASSWORD=yourpasswd  # 登陆密码
+  - TIMEOUT=600  # 超时时间
+</code></pre>
+</li>
+</ul>
+<h2 id="三-日常管理">三、日常管理</h2>
+<ul>
+<li>
+<p>启动（以下选其一）：</p>
+<ul>
+<li>
+<p><code>./auto_run.sh</code></p>
+</li>
+<li>
+<p><code>./tools/up.sh</code></p>
+</li>
+</ul>
+</li>
+<li>
+<p>停止</p>
+<ul>
+<li><code>./tools/down.sh</code></li>
+</ul>
+</li>
+<li>
+<p>查看日志</p>
+<ul>
+<li><code>./tools/log.sh</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="四-客户端下载">四、客户端下载</h2>
+<ul>
+<li>
+<p><a href="https://github.com/shadowsocks/shadowsocks-windows/releases/download/4.1.5/Shadowsocks-4.1.5.zip">Windows 客户端</a></p>
+</li>
+<li>
+<p><a href="https://github.com/shadowsocks/shadowsocks-android/releases/download/v4.7.4/shadowsocks--universal-4.7.4.apk">Android 客户端</a></p>
+</li>
+<li>
+<p><a href="http://shadowsocks.org/en/download/clients.html">更多其他平台的客户端</a></p>
+</li>
+</ul>
+<h2 id="五-共享配置">五、共享配置</h2>
+<ul>
+<li>
+<p>Windows 平台</p>
+<ul>
+<li>
+<p>在 shadowsocks 文件夹找到以下两个文件，复制粘贴即可：</p>
+</li>
+<li>
+<p><code>gui-config.json</code>：配置服务器，端口，密码等</p>
+</li>
+<li>
+<p><code>pac.txt</code>：配置哪些域名需要代理</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Android 平台</p>
+<ul>
+<li>
+<p>在 <code>tools</code> 文件夹下，找到 <code>json_to_ss.py</code> 的脚本</p>
+</li>
+<li>
+<p>运行 <code>pytho json_to_ss.py 【你的配置文件】</code></p>
+</li>
+<li>
+<p>复制，在手机端找到【从剪贴板导入】</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="六-官方导航">六、官方导航</h2>
+<ul>
+<li>
+<p><a href="http://shadowsocks.org">ShadowSocks 官网</a></p>
+</li>
+<li>
+<p><a href="https://hub.docker.com/r/shadowsocks/shadowsocks-libev">ShadowSocks in Docker Hub</a></p>
+</li>
+<li>
+<p><a href="https://github.com/shadowsocks">ShadowSocks in GitHub</a></p>
+</li>
+</ul>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E3%80%87-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%86%B5">〇、基本概况</a></li>
+<li><a href="#%E4%B8%80-%E5%BF%AB%E9%80%9F%E9%83%A8%E7%BD%B2">一、快速部署</a></li>
+<li><a href="#%E4%BA%8C-%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE">二、参数配置</a></li>
+<li><a href="#%E4%B8%89-%E6%97%A5%E5%B8%B8%E7%AE%A1%E7%90%86">三、日常管理</a></li>
+<li><a href="#%E5%9B%9B-%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%B8%8B%E8%BD%BD">四、客户端下载</a></li>
+<li><a href="#%E4%BA%94-%E5%85%B1%E4%BA%AB%E9%85%8D%E7%BD%AE">五、共享配置</a></li>
+<li><a href="#%E5%85%AD-%E5%AE%98%E6%96%B9%E5%AF%BC%E8%88%AA">六、官方导航</a></li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+
+        
+
+        <div class="site-footer">
+  <p class="published border-effect">Copyright &copy; HAI</p>
+  <a class="rss" href="https://besthai.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>
